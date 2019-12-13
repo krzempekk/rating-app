@@ -1,0 +1,19 @@
+<form [formGroup]="modelForm" (ngSubmit)="onSubmit(modelForm)">
+
+  <label for="name">Name</label><input name="name" id="name" formControlName="name"/>
+  {{ formErrors.name }}
+  <label for="ECTS">ECTS</label><input type="number" id="ECTS" name="ECTS" formControlName="ECTS"/>
+  {{ formErrors.ECTS }}
+  <label for="semester">Semester</label><input type="number" id="semester" name="semester" formControlName="semester"/>
+  {{ formErrors.semester }}
+  <label for="form">Form</label><input id="form" name="form" formControlName="form"/>
+  {{ formErrors.form }}
+  <label for="studentsLimit">Students limit</label><input type="number" id="studentsLimit" name="studentsLimit" formControlName="studentsLimit"/>
+  {{ formErrors.studentsLimit }}
+  <label for="avatar">Avatar</label><input id="avatar" name="avatar" formControlName="avatar"/>
+  {{ formErrors.avatar }}
+  <label for="description">Description</label><input id="description" name="description" formControlName="description"/>
+  {{ formErrors.description }}
+
+  <button type="submit">Add course</button>
+</form>

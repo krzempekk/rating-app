@@ -1,0 +1,6 @@
+<div>
+  {{ course.name }}
+  <button (click)="deleteCourse.emit()">Delete course</button>
+  <app-star-rating [rating]="userRating || course.currentRating" (ratingChanged)="onRatingChanged($event)"></app-star-rating>
+</div>
+

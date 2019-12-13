@@ -1,0 +1,8 @@
+<div class="course-list">
+  <div *ngFor="let course of courses | coursesFilterPipe : ''">
+    <app-course [course]="course" (deleteCourse)="onDeleteCourse(course.id)"></app-course>
+  </div>
+</div>
+<app-courses-filter></app-courses-filter>
+<!--<app-course-details [course]="courses[0]"></app-course-details>-->
+<app-course-add></app-course-add>
