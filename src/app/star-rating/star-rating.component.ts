@@ -20,8 +20,4 @@ export class StarRatingComponent implements OnInit {
   changeRating(newRating: number): void {
     this.ratingChanged.emit(newRating);
   }
-
-  onHover(event): void {
-    // debugger;
-  }
 }

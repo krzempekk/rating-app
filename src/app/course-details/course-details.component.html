@@ -3,7 +3,10 @@
   ECTS: {{ course.ECTS }}
   Semester: {{ course.semester }}
   Form: {{ course.form }}
+  Students enrolled: {{ course.studentsEnrolled }}
   Students limit: {{ course.studentsLimit }}
   Current rating: {{ course.currentRating }}
   Description: {{ course.description }}
+  <button *ngIf="enrollement" (click)="enroll()" [disabled]="!canEnroll">Enroll</button>
+  <app-star-rating *ngIf="isAuthenticated && isEnrolled" [rating]="rating" (ratingChanged)="onRatingChanged($event)"></app-star-rating>
 </div>

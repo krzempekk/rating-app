@@ -1,0 +1,6 @@
+<div>
+  <a routerLink="/">Dashboard</a>
+  <a *ngIf="!isAuthenticated" routerLink="/login">Login</a>
+  <a *ngIf="!isAuthenticated" routerLink="/register">Register</a>
+  <span *ngIf="isAuthenticated" (click)="logout()">Logout</span>
+</div>

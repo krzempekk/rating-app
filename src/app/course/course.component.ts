@@ -16,8 +16,4 @@ export class CourseComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  onRatingChanged(event) {
-    this.userRating = event;
-  }
 }

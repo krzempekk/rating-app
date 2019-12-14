@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CoursesService } from '../courses.service';
 import { Course } from '../Course';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-courses-list',
@@ -10,7 +11,7 @@ import { Course } from '../Course';
 export class CoursesListComponent implements OnInit {
   courses: Course[];
 
-  constructor(private coursesService: CoursesService) {
+  constructor(private coursesService: CoursesService, private authService: AuthService) {
     coursesService.coursesObservable$.subscribe(courses => this.courses = courses);
   }
 
@@ -22,8 +23,8 @@ export class CoursesListComponent implements OnInit {
     this.getCourses();
   }
 
+
   onDeleteCourse(id: number): void {
     this.coursesService.deleteCourse(id);
   }
-
 }

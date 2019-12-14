@@ -4,6 +4,7 @@ export interface Course {
   ECTS: number;
   semester: number;
   form: string;
+  studentsEnrolled: number;
   studentsLimit: number;
   currentRating: number;
   avatar: string;
