@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../auth.service';
+import {Router} from '@angular/router';
+import {UserService} from '../user.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,15 +9,23 @@ import {AuthService} from '../auth.service';
 })
 export class MenuComponent implements OnInit {
   isAuthenticated: boolean;
+  isAdmin: boolean;
 
-  constructor(private authService: AuthService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    this.authService.userData.subscribe(authData => this.isAuthenticated = !!authData);
+    if(this.userService.userLoaded) {
+      this.isAuthenticated = !!this.userService.user;
+      this.isAdmin = this.isAuthenticated && this.userService.hasRole('ADMIN');
+    }
+    this.userService.userObservable$.subscribe(user => {
+      this.isAuthenticated = !!user;
+      this.isAdmin = this.isAuthenticated && this.userService.hasRole('ADMIN');
+    });
   }
 
   logout() {
-    this.authService.signOutUser();
+    this.userService.signOutUser().then(() => this.router.navigateByUrl('/login'));
   }
 
 }

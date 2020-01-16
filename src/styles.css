@@ -1,1 +1,123 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Didact Gothic', sans-serif;
+}
+
+h2 {
+  margin: 0.5rem 0;
+  font-size: 2rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+form {
+  font-size: 1.2rem;
+}
+
+form .field {
+  margin-bottom: 1rem;
+}
+
+form label {
+  display: inline-block;
+  width: 5rem;
+  margin-right: 0.5rem;
+}
+
+form input {
+  font: inherit;
+  background-color: transparent;
+  padding: 0.4rem 0.4rem 0.4rem 1rem;
+  border: 2px solid #483D3F;
+  border-radius: 1rem;
+}
+
+form button {
+  border: none;
+  font: inherit;
+  background-color: #483D3F;
+  color: #F4EBD9;
+  padding: 0.4rem 2rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+form .errors {
+  margin-left: 1rem;
+}
+
+form.inline-form {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+form.inline-form .field {
+  margin-bottom: 0;
+}
+
+form.inline-form label {
+  width: auto;
+}
+
+form.inline-form input {
+  width: 5rem;
+  padding: 0.2rem 0.2rem 0.2rem 0.5rem;
+  margin-right: 1rem;
+}
+
+input.ng-valid {
+  border-color: #688E26;
+}
+
+input.ng-invalid:not(.ng-untouched), input.ng-invalid.ng-dirty {
+  border-color: #941B0C;
+}
+
+.course-list {
+  font-size: 1.3rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.course-list-item {
+  color: #F4EBD9;
+  padding: 1rem;
+  flex: 0 0 calc((100% - 1.5rem) / 3);
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.course-list .course-list-item:nth-child(even)  {
+  background-color: #0B4F6C;
+}
+
+.course-list .course-list-item:nth-child(odd)  {
+  background-color: #058ED9;
+}
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 2px solid #483D3F;
+  -webkit-text-fill-color: inherit;
+  -webkit-box-shadow: inherit;
+  transition: background-color 5000s ease-in-out 0s;
+}

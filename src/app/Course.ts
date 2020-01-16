@@ -1,12 +1,13 @@
 export interface Course {
-  id: number;
+  id: string;
   name: string;
   ECTS: number;
   semester: number;
   form: string;
   studentsEnrolled: number;
   studentsLimit: number;
-  currentRating: number;
+  ratingSum: number;
+  ratingCount: number;
   avatar: string;
   description: string;
 }

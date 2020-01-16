@@ -1,19 +1,40 @@
 <form [formGroup]="modelForm" (ngSubmit)="onSubmit(modelForm)">
+  <div class="field">
+    <label for="name">Name</label>
+    <input name="name" id="name" formControlName="name"/>
+    <span *ngIf="formErrors.name" class="errors">{{ formErrors.name }}</span>
+  </div>
+  <div class="field">
+    <label for="ECTS">ECTS</label>
+    <input type="number" id="ECTS" name="ECTS" formControlName="ECTS"/>
+    <span *ngIf="formErrors.ECTS" class="errors">{{ formErrors.ECTS }}</span>
+  </div>
+  <div class="field">
+    <label for="semester">Semester</label>
+    <input type="number" id="semester" name="semester" formControlName="semester"/>
+    <span *ngIf="formErrors.semester" class="errors">{{ formErrors.semester }}</span>
+  </div>
+  <div class="field">
+    <label for="form">Form</label>
+    <input id="form" name="form" formControlName="form"/>
+    <span *ngIf="formErrors.form" class="errors">{{ formErrors.form }}</span>
+  </div>
+  <div class="field">
+    <label for="studentsLimit">Students limit</label>
+    <input type="number" id="studentsLimit" name="studentsLimit" formControlName="studentsLimit"/>
+    <span *ngIf="formErrors.studentsLimit" class="errors">{{ formErrors.studentsLimit }}</span>
+  </div>
+  <div class="field">
+    <label for="avatar">Avatar</label>
+    <input id="avatar" name="avatar" formControlName="avatar"/>
+    <span *ngIf="formErrors.avatar" class="errors">{{ formErrors.avatar }}</span>
+  </div>
+  <div class="field">
+    <label for="description">Description</label>
+    <input id="description" name="description" formControlName="description"/>
+    <span *ngIf="formErrors.description" class="errors">{{ formErrors.description }}</span>
+  </div>
 
-  <label for="name">Name</label><input name="name" id="name" formControlName="name"/>
-  {{ formErrors.name }}
-  <label for="ECTS">ECTS</label><input type="number" id="ECTS" name="ECTS" formControlName="ECTS"/>
-  {{ formErrors.ECTS }}
-  <label for="semester">Semester</label><input type="number" id="semester" name="semester" formControlName="semester"/>
-  {{ formErrors.semester }}
-  <label for="form">Form</label><input id="form" name="form" formControlName="form"/>
-  {{ formErrors.form }}
-  <label for="studentsLimit">Students limit</label><input type="number" id="studentsLimit" name="studentsLimit" formControlName="studentsLimit"/>
-  {{ formErrors.studentsLimit }}
-  <label for="avatar">Avatar</label><input id="avatar" name="avatar" formControlName="avatar"/>
-  {{ formErrors.avatar }}
-  <label for="description">Description</label><input id="description" name="description" formControlName="description"/>
-  {{ formErrors.description }}
-
-  <button type="submit">Add course</button>
+  <button type="submit">{{ isEditing ? 'Edit course' : 'Add course' }}</button>
+  <button (click)="cancelEditing()" *ngIf="isEditing">Cancel editing</button>
 </form>

@@ -1,0 +1,11 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  background-color: #F4EBD9;
+}
+
+.content {
+  padding: 1.5rem;
+  color: #483D3F;
+  width: 100%;
+}

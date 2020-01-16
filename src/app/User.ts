@@ -1,10 +1,8 @@
-import {Course} from './Course';
-
 export interface User {
-  id: number;
+  id: string;
   roles: string[];
   coursesEnrollment: {
-    id: number;
+    id: string;
     rating?: number;
   }[];
 }

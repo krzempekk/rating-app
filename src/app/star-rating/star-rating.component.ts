@@ -9,6 +9,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 export class StarRatingComponent implements OnInit {
   faStar = faStar;
   @Input() rating;
+  @Input() editable = true;
   @Output() ratingChanged = new EventEmitter();
 
   constructor() {

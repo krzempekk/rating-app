@@ -3,7 +3,18 @@
 <div class="course-list">
   <div class="course-list-item" *ngFor="let course of filteredCourses.slice(paginationStart, paginationStart + elementsOnPage)">
     <a [routerLink]="'/course/' + course.id"> {{ course.name }} </a>
-    <app-star-rating class="course-list-rating" [editable]="false" [rating]="course.ratingCount === 0 ? 0 : course.ratingSum / course.ratingCount"></app-star-rating>
+    <fa-icon
+      class="item-edit"
+      [icon]="faEdit"
+      (click)="onEditCourse(course.id)">
+    </fa-icon>
+    <fa-icon
+      class="item-delete"
+      [icon]="faTrashAlt"
+      (click)="onDeleteCourse(course.id)">
+    </fa-icon>
   </div>
 </div>
 <app-pagination [elementsNumber]="filteredCourses.length" [elementsOnPage]="elementsOnPage" (settingsChanged)="paginationChanged($event)"></app-pagination>
+
+<app-course-add [editedCourse]="editedCourse"></app-course-add>

@@ -1,0 +1,67 @@
+.course-details {
+
+}
+
+.course-header {
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #483D3F;
+  display: flex;
+  align-items: center;
+}
+
+.course-header img {
+  display: block;
+  margin-right: 0.5rem;
+  width: 50px;
+}
+
+.course-name {
+  font-size: 2rem;
+}
+
+.course-semester {
+  font-size: 1.5rem;
+}
+
+.course-ects {
+  font-size: 1.5rem;
+}
+
+.course-subheader {
+  margin-bottom: 0.5rem;
+}
+
+.course-subheader .label {
+  font-weight: 700;
+  margin-right: 0.3rem;
+}
+
+.course-subheader .value {
+  font-size: 1.2rem;
+  margin-right: 0.9rem;
+}
+
+.course-enrollment {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+button {
+  border: none;
+  font: inherit;
+  background-color: #483D3F;
+  color: #F4EBD9;
+  padding: 0.4rem 2rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+button[disabled] {
+  cursor: not-allowed;
+}
+
+.rating-stars ul {
+  margin: 0;
+}

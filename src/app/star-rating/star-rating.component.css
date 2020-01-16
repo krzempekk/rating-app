@@ -1,7 +1,12 @@
 .rating-stars ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
   display: inline-block;
+}
+
+.rating-stars.editable ul {
+  cursor: pointer;
 }
 
 .rating-stars ul > li.star {

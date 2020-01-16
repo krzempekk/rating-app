@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {CoursesService} from '../courses.service';
-import {debounceTime} from 'rxjs/operators';
-import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
+import {UserService} from '../user.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +11,7 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
   modelForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) {
   }
 
   formErrors = {
@@ -54,9 +52,12 @@ export class LoginComponent implements OnInit {
 
   onSubmit(form) {
     if (form.status === 'VALID') {
-      this.authService.signInUser(form.value.email, form.value.password)
+      this.userService.signInUser(form.value.email, form.value.password)
         .then(result => {
           this.router.navigateByUrl('/');
+        })
+        .catch(error => {
+          this.formErrors.email = error.message;
         });
     }
   }

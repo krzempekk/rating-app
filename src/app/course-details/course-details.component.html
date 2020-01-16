@@ -1,12 +1,30 @@
-<div>
-  Name: {{ course.name }}
-  ECTS: {{ course.ECTS }}
-  Semester: {{ course.semester }}
-  Form: {{ course.form }}
-  Students enrolled: {{ course.studentsEnrolled }}
-  Students limit: {{ course.studentsLimit }}
-  Current rating: {{ course.currentRating }}
-  Description: {{ course.description }}
-  <button *ngIf="enrollement" (click)="enroll()" [disabled]="!canEnroll">Enroll</button>
-  <app-star-rating *ngIf="isAuthenticated && isEnrolled" [rating]="rating" (ratingChanged)="onRatingChanged($event)"></app-star-rating>
+<div class="course-details" *ngIf="course">
+  <div class="course-header">
+    <img src="{{course.avatar}}" alt="course icon">
+    <div>
+      <span class="course-name">{{ course.name }}</span>
+      realized on
+      <span class="course-semester">{{ course.semester }}</span>
+      semester, with
+      <span class="course-ects">{{ course.ECTS }}</span>
+      ECTS points
+    </div>
+  </div>
+  <div class="course-subheader">
+    <span *ngIf="course.form">
+      <span class="label">Form</span>
+      <span class="value">{{ course.form }}</span>
+    </span>
+    <span class="label">Students enrolled</span>
+    <span class="value">{{ course.studentsEnrolled }} {{ course.studentsLimit ? '/ ' + course.studentsLimit : '' }}</span>
+    <span class="label">Current rating</span>
+    <span class="value">{{ course.ratingCount === 0 ? 0 : (course.ratingSum / course.ratingCount).toFixed(2) }}</span>
+  </div>
+  <div class="course-enrollment">
+    <button *ngIf="isAuthenticated && enrollmentStatus !== EnrollmentStatus.CANT_ENROLL" (click)="enroll()" [disabled]="enrollmentStatus !== EnrollmentStatus.CAN_ENROLL">
+      {{ enrollmentStatus === EnrollmentStatus.CAN_ENROLL ? 'Enroll' : 'You are enrolled' }}
+    </button>
+    <app-star-rating *ngIf="isAuthenticated && enrollmentStatus === EnrollmentStatus.ENROLLED" [rating]="rating" (ratingChanged)="onRatingChanged($event)"></app-star-rating>
+  </div>
+  {{ course.description }}
 </div>

@@ -1,9 +1,13 @@
 <form [formGroup]="modelForm" (ngSubmit)="onSubmit(modelForm)">
-
-  <label for="email">Email</label><input name="email" id="email" formControlName="email"/>
-  {{ formErrors.email }}
-  <label for="password">Password</label><input type="password" id="password" name="password" formControlName="password"/>
-  {{ formErrors.password }}
-
+  <div class="field">
+    <label for="email">Email</label>
+    <input name="email" id="email" formControlName="email"/>
+    <span *ngIf="formErrors.email" class="errors">{{ formErrors.email }}</span>
+  </div>
+  <div class="field">
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" formControlName="password"/>
+    <span *ngIf="formErrors.password" class="errors">{{ formErrors.password }}</span>
+  </div>
   <button type="submit">Login</button>
 </form>

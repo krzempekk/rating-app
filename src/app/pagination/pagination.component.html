@@ -1,0 +1,6 @@
+<select (change)="elementsOnPageChanged($event.target.value)">
+  <option [ngValue]="3">3</option>
+  <option [ngValue]="6">6</option>
+  <option [ngValue]="9">9</option>
+</select>
+<button *ngFor="let i of pageIndexes()" (click)="pageChanged(i)" [class.selected]="i === pageNumber">{{i}}</button>

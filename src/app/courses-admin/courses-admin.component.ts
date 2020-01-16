@@ -1,18 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { CoursesService } from '../courses.service';
 import { Course } from '../Course';
+import { CoursesService } from '../courses.service';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-courses-list',
-  templateUrl: './courses-list.component.html',
-  styleUrls: ['./courses-list.component.css']
+  selector: 'app-courses-admin',
+  templateUrl: './courses-admin.component.html',
+  styleUrls: ['./courses-admin.component.css']
 })
-export class CoursesListComponent implements OnInit {
+export class CoursesAdminComponent implements OnInit {
   courses: Course[] = [];
   filteredCourses: Course[] = [];
   filters: { name?: string, ECTS?: number, semester?: number, rate?: number };
+  faTrashAlt = faTrashAlt;
+  faEdit = faEdit;
   paginationStart = 0;
   elementsOnPage = 3;
+  editedCourse: Course;
 
   constructor(private coursesService: CoursesService) {
     coursesService.coursesObservable$.subscribe(courses => {
@@ -23,12 +28,17 @@ export class CoursesListComponent implements OnInit {
 
   ngOnInit() {
     this.filters = {};
-    this.getCourses();
-  }
-
-  getCourses(): void {
     this.courses = this.coursesService.getCourses();
     this.filteredCourses = this.coursesService.getCourses();
+    this.editedCourse = null;
+  }
+
+  onEditCourse(id: string) {
+    this.editedCourse = this.courses.find(course => course.id === id);
+  }
+
+  onDeleteCourse(id: string): void {
+    this.coursesService.deleteCourse(id);
   }
 
   filterCourses(values) {

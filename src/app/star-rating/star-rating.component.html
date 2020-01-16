@@ -1,7 +1,8 @@
-<div class='rating-stars text-center'>
+<div class='rating-stars text-center' [class.editable]="editable">
   <ul id='stars'>
     <li class="star" *ngFor="let i of [1,2,3,4,5]">
       <fa-icon
+        size="lg"
         [icon]="faStar"
         [styles]="i <= rating ? {'stroke': '#FFCC36', 'color': '#FFCC36'} : {'stroke': '#CCC', 'color': '#CCC'}"
         (click)="changeRating(i)"

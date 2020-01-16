@@ -1,0 +1,23 @@
+select {
+  background-color: #145C9E;
+  border: none;
+  color: #F4EBD9;
+  padding: 0.2rem 0.3rem;
+  font: inherit;
+  margin-right: 0.5rem;
+}
+
+button {
+  background-color: #058ED9;
+  border: none;
+  font: inherit;
+  font-weight: 700;
+  color: #F4EBD9;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+  margin-right: 0.3rem;
+}
+
+.selected {
+  background-color: #0B4F6C;
+}

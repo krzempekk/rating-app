@@ -1,16 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Course} from '../Course';
 import {ActivatedRoute} from '@angular/router';
 import {CoursesService} from '../courses.service';
-import {AuthService} from '../auth.service';
 import {UserService} from '../user.service';
 
 enum EnrollmentStatus {
-  ENROLLLED = 'ENROLLED',
+  ENROLLED = 'ENROLLED',
   CAN_ENROLL = 'CAN_ENROLL',
   CANT_ENROLL = 'CANT_ENROLL'
 }
-
 
 @Component({
   selector: 'app-course-details',
@@ -18,48 +15,56 @@ enum EnrollmentStatus {
   styleUrls: ['./course-details.component.css']
 })
 export class CourseDetailsComponent implements OnInit {
-  course: Course;
-  canEnroll: boolean;
-  isEnrolled: boolean;
+  course: any;
   rating: number;
   isAuthenticated: boolean;
   enrollmentStatus: EnrollmentStatus = EnrollmentStatus.CANT_ENROLL;
+  EnrollmentStatus = EnrollmentStatus;
 
-  constructor(private route: ActivatedRoute, private coursesService: CoursesService, private authService: AuthService, private userService: UserService) {
+  constructor(private route: ActivatedRoute, private coursesService: CoursesService, private userService: UserService) {
   }
 
   ngOnInit() {
     this.getCourse();
-    const { id, studentsEnrolled, studentsLimit } = this.course;
-    this.authService.userData.subscribe(authData => {
-      this.isAuthenticated = !!authData;
-      if (this.isAuthenticated) {
-        this.canEnroll = this.userService.hasRole('STUDENT') && !this.userService.isEnrolled(id) && studentsEnrolled < studentsLimit;
-        this.isEnrolled = this.userService.isEnrolled(id);
-        if (this.isEnrolled) {
-          this.rating = this.userService.getRating(id);
-        }
-      }
-    });
   }
 
   getCourse() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.course = this.coursesService.getCourse(id);
+    const id = this.route.snapshot.paramMap.get('id');
+    this.coursesService.getCourse(id).subscribe(course => {
+      this.course = course;
+
+      this.updateEnrollmentInfo(this.userService.user);
+
+      this.userService.userObservable$.subscribe(user => {
+        this.updateEnrollmentInfo(user);
+      });
+    });
+  }
+
+  updateEnrollmentInfo(user) {
+    const { id, studentsEnrolled, studentsLimit } = this.course;
+
+    this.isAuthenticated = !!user;
+    if (this.isAuthenticated) {
+      if (this.userService.isEnrolled(id)) {
+        this.enrollmentStatus = EnrollmentStatus.ENROLLED;
+        this.rating = this.userService.getRating(id);
+      } else if (this.userService.hasRole('STUDENT') && (!studentsLimit || studentsEnrolled < studentsLimit)) {
+        this.enrollmentStatus = EnrollmentStatus.CAN_ENROLL;
+      }
+    }
   }
 
   enroll() {
     const { id } = this.course;
     this.userService.enroll(id);
-    this.isEnrolled = true;
-    this.course.studentsEnrolled++;
-    this.canEnroll = false;
+    this.enrollmentStatus = EnrollmentStatus.ENROLLED;
   }
 
   onRatingChanged(rating) {
     const { id } = this.course;
-    this.rating = rating;
     this.userService.setRating(id, rating);
+    this.rating = rating;
   }
 
 }

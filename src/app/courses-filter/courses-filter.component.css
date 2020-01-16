@@ -1,0 +1,7 @@
+form {
+  margin-top: 1rem;
+}
+
+.field:nth-child(1) input {
+  width: 10rem;
+}

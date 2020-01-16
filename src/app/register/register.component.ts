@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
+import {UserService} from '../user.service';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 export class RegisterComponent implements OnInit {
   modelForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
 
   formErrors = {
     email: '',
@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(form) {
     if (form.status === 'VALID') {
-      this.authService.registerUser(form.value.email, form.value.password)
+      this.userService.registerUser(form.value.email, form.value.password)
         .then(result => {
           this.router.navigateByUrl('/');
         });
